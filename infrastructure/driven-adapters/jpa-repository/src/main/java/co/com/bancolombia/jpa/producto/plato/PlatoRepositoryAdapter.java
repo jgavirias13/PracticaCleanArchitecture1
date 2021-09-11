@@ -21,10 +21,12 @@ public class PlatoRepositoryAdapter extends
         super(repository, mapper, d -> {
             Plato p = mapper.map(d, Plato.class);
             Set<IngredientePlato> ingredientes = new HashSet<>();
-            d.getIngredientesPlato().forEach(i -> {
-                ingredientes.add(mapper.map(i, IngredientePlato.class));
-            });
-            p.setIngredientes(ingredientes);
+            if(d.getIngredientesPlato() != null){
+                d.getIngredientesPlato().forEach(i -> {
+                    ingredientes.add(mapper.map(i, IngredientePlato.class));
+                });
+                p.setIngredientes(ingredientes);
+            }
             return p;
         });
     }
