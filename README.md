@@ -1,47 +1,43 @@
-# Proyecto Base Implementando Clean Architecture
+# Tienda Tio Pepe
 
-## Antes de Iniciar
+Se implementa aplicaciÃ³n para la necesidad especificada usando el
+plugin de clean architecture de Bancolombia. Se implementan 6 endpoints:
 
-Empezaremos por explicar los diferentes componentes del proyectos y partiremos de los componentes externos, continuando con los componentes core de negocio (dominio) y por último el inicio y configuración de la aplicación.
+- Obtener el listado de Ingredientes
+- Obtener el listado de platos con sus ingredientes
+- Crear un ingrediente
+- Crear un plato
+- Eliminar un ingrediente
+- Eliminar un plato
 
-Lee el artículo [Clean Architecture — Aislando los detalles](https://medium.com/bancolombia-tech/clean-architecture-aislando-los-detalles-4f9530f35d7a)
+## Funcionalidades
 
-# Arquitectura
+### Obtener listado de ingredientes
 
-![Clean Architecture](https://miro.medium.com/max/1400/1*ZdlHz8B0-qu9Y-QO3AXR_w.png)
+Se crea un endpoint de ingredientes que, al hacer GET, retorna todo el listado
+de ingredientes
 
-## Domain
+![Get ingredientes](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/GetIngredientes.png?raw=true)
 
-Es el módulo más interno de la arquitectura, pertenece a la capa del dominio y encapsula la lógica y reglas del negocio mediante modelos y entidades del dominio.
+### Obtener el listado de platos
 
-## Usecases
+Se crea un endpoint de platos que, al hacer GET, retorna todo el listado de
+platos
 
-Este módulo gradle perteneciente a la capa del dominio, implementa los casos de uso del sistema, define lógica de aplicación y reacciona a las invocaciones desde el módulo de entry points, orquestando los flujos hacia el módulo de entities.
+![Get Platos 1](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/GetPlatos1.png?raw=true)
 
-## Infrastructure
+![Get Platos 2](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/GetPlatos2.png?raw=true)
 
-### Helpers
+![Get Platos 3](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/GetPlatos3.png?raw=true)
 
-En el apartado de helpers tendremos utilidades generales para los Driven Adapters y Entry Points.
+### Crear un ingrediente
 
-Estas utilidades no están arraigadas a objetos concretos, se realiza el uso de generics para modelar comportamientos
-genéricos de los diferentes objetos de persistencia que puedan existir, este tipo de implementaciones se realizan
-basadas en el patrón de diseño [Unit of Work y Repository](https://medium.com/@krzychukosobudzki/repository-design-pattern-bc490b256006)
+Al hacer post sobre el endpoint de ingredientes, se puede crear un ingrediente
 
-Estas clases no puede existir solas y debe heredarse su compartimiento en los **Driven Adapters**
+![Crear Ingrediente](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/PostIngredientes1.png?raw=true)
 
-### Driven Adapters
+### Crear un plato
 
-Los driven adapter representan implementaciones externas a nuestro sistema, como lo son conexiones a servicios rest,
-soap, bases de datos, lectura de archivos planos, y en concreto cualquier origen y fuente de datos con la que debamos
-interactuar.
+Al hacer post sobre el endpoint de platos, se puede crear un plato
 
-### Entry Points
-
-Los entry points representan los puntos de entrada de la aplicación o el inicio de los flujos de negocio.
-
-## Application
-
-Este módulo es el más externo de la arquitectura, es el encargado de ensamblar los distintos módulos, resolver las dependencias y crear los beans de los casos de use (UseCases) de forma automática, inyectando en éstos instancias concretas de las dependencias declaradas. Además inicia la aplicación (es el único módulo del proyecto donde encontraremos la función “public static void main(String[] args)”.
-
-**Los beans de los casos de uso se disponibilizan automaticamente gracias a un '@ComponentScan' ubicado en esta capa.**
+![Crear Plato](https://github.com/jgavirias13/PracticaCleanArchitecture1/blob/master/images/PostPlato.png?raw=true)
